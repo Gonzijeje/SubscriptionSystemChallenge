@@ -21,13 +21,14 @@ Event-driven Microservice System to manage Subscriptions. Java application based
 > mvn clean package
 2. Build docker image for every microservice
 > docker build --tag=project-name:latest .
-3.  Create Docker containers
+3. Replace <YOUR_IP_HOST> in docker-compose.yml with your ip host.
+4. Create Docker containers
 > docker-compose up --no-start
-4. Run all Docker containers except microservices
+5. Run all Docker containers except microservices
 > docker start 'container-name'
-5. Create 2 topics in Kafka cluster
+6. Create 2 topics in Kafka cluster
 > event-subscription  // subscriptions
-6. Start the Docker microservices
+7. Start the Docker microservices
 
 ## All comands
 - GET all subscriptions -> GET localhost:8084/subscriptions
