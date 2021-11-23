@@ -1,0 +1,31 @@
+# Local port to run Producer Tomcat
+server:
+  port: 8087
+spring:
+  kafka:
+    bootstrap-servers: ${KAFKA_HOST_1:localhost:9092},${KAFKA_HOST_2:localhost:9094},${KAFKA_HOST_3:localhost:9095}
+    consumer:
+      group-id: mail-consumer
+      auto-offset-reset: earliest
+      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.json.trusted.packages: '*'
+        spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+    listener:
+      missing-topics-fatal: false
+
+  mail:
+    host: ${MAIL_DEBUG_HOST:localhost}
+    port: 1025
+    properties:
+      mail.smtp.auth: false
+      mail.smtp.starttls.enable: false
+    addresses:
+      from: test@adidas.com
+      replyTo: no-reply@adidas.com
+kafka:
+  enabled: true
+  topics:
+    mail-confirmation: mail-confirmation

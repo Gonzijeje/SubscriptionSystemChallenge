@@ -1,0 +1,41 @@
+server:
+  port: 8084
+spring:
+  kafka:
+    bootstrap-servers: ${KAFKA_HOST_1:localhost:9092},${KAFKA_HOST_2:localhost:9094},${KAFKA_HOST_3:localhost:9095}
+  cloud:
+    stream:
+      function:
+        definition: publicServiceConsumer
+      bindings:
+        publicServiceConsumer-in-0:
+          destination: subscriptions
+      kafka:
+        bindings:
+          publicServiceConsumer-in-0:
+            consumer:
+              configuration:
+                key:
+                  deserializer: org.apache.kafka.common.serialization.StringSerializer
+                value:
+                  deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+        binder:
+          autoCreateTopics: true
+          brokers:
+            - ${KAFKA_HOST_1:localhost:9092}
+            - ${KAFKA_HOST_2:localhost:9094}
+            - ${KAFKA_HOST_3:localhost:9095}
+          configuration:
+            key:
+              deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+            value:
+              deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+spring.cloud.stream.kafka.streams.binder.configuration.application.server: localhost:${server.port}
+spring.cloud.stream.kafka.streams.binder.configuration.commit.interval.ms: 1000
+spring.cloud.stream.kafka.streams.binder.configuration.replication.factor: 1
+
+application:
+  clients:
+    - username: admin
+      password: admin
+      roles: ADMIN

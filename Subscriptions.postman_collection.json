@@ -1,0 +1,137 @@
+{
+	"info": {
+		"_postman_id": "0ec0a654-c884-49b7-8817-b904f02fd3eb",
+		"name": "Subscriptions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET ALL Subscriptions",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8084/subscriptions",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"subscriptions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET ONE Subscription",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8084/subscriptions/{id}",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"subscriptions",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE Subscription",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"example@gmail.com\",\r\n    \"firstName\": \"Gonzalo\",\r\n    \"gender\": \"M\",\r\n    \"birthDate\": \"13/09/1997\",\r\n    \"consent\": true,\r\n    \"newsletterId\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8084/subscriptions",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"subscriptions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Subscription",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8084/subscriptions/{id}",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"subscriptions",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

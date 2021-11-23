@@ -1,0 +1,33 @@
+server:
+  port: 8086
+spring:
+  kafka:
+    bootstrap-servers: ${KAFKA_HOST_1:localhost:9092},${KAFKA_HOST_2:localhost:9094},${KAFKA_HOST_3:localhost:9095}
+  cloud:
+    stream:
+      function:
+        definition: subscriptionProcessor
+      bindings:
+        subscriptionProcessor-in-0:
+          destination: event-subscription
+      kafka:
+        bindings:
+          subscriptionProcessor-in-0:
+            consumer:
+              properties:
+                spring.json.trusted.packages: "com.challenge.model"
+              configuration:
+                key:
+                  deserializer: org.apache.kafka.common.serialization.StringSerializer
+                value:
+                  deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+        binder:
+          brokers:
+            - ${KAFKA_HOST_1:localhost:9092}
+            - ${KAFKA_HOST_2:localhost:9094}
+            - ${KAFKA_HOST_3:localhost:9095}
+          configuration:
+            key:
+              deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+            value:
+              deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
